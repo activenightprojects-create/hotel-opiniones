@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Dejar opinión - Hoteles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 25px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .trabajador {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e6e;
+        }
+
+        .idioma-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .idioma-selector button {
+            padding: 6px 18px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        #btnEs {
+            background: #2c3e6e;
+            color: white;
+        }
+
+        #btnEn {
+            background: #ddd;
+            color: #333;
+        }
+
+        .seccion-hoteles {
+            margin: 20px 0;
+        }
+
+        .titulo-seccion {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .hoteles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .hotel-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .hotel-card.seleccionado {
+            border-color: #667eea;
+            background: #f0f4ff;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .hotel-imagen {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            background: #f5f5f5;
+        }
+
+        .hotel-nombre {
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .seccion-plataformas {
+            display: none;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px dashed #ddd;
+        }
+
+        .instruccion {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 10px 0 15px 0;
+            font-size: 15px;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+            text-align: left;
+            font-weight: normal;
+        }
+
+        .instruccion strong {
+            color: #d32f2f;
+        }
+
+        .plataformas-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .boton-plataforma {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .boton-plataforma:hover {
+            transform: scale(1.02);
+        }
+
+        .google { border-left: 5px solid #4285F4; }
+        .booking { border-left: 5px solid #003580; }
+        .tripadvisor { border-left: 5px solid #00A680; }
+        .expedia { border-left: 5px solid #FF6600; }
+
+        .boton-copiar {
+            background: #2c3e6e;
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            transition: all 0.3s;
+        }
+
+        .boton-copiar:hover {
+            background: #1e2b4a;
+            transform: scale(1.02);
+        }
+
+        .texto-copiar {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            cursor: pointer;
+            word-break: break-word;
+            font-weight: bold;
+            color: #2c3e6e;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e6e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .toast.mostrar {
+            opacity: 1;
+        }
+
+        .boton-reiniciar {
+            background: #ddd;
+            color: #333;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 30px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 11px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="titulo">📝 ¿Dónde fuiste atendida?</h1>
+    
+    <div class="idioma-selector">
+        <button id="btnEs">🇪🇸 Español</button>
+        <button id="btnEn">🇬🇧 English</button>
+    </div>
+
+    <div class="trabajador" id="trabajadorDiv">
+        👩 Atendida por: <strong id="nombreTrabajador">CARGANDO...</strong>
+    </div>
+
+    <div class="seccion-hoteles">
+        <div class="titulo-seccion" id="tituloHoteles">🏨 Elige el hotel donde te alojaste</div>
+        <div class="hoteles-grid" id="hotelesGrid"></div>
+    </div>
+
+    <div class="seccion-plataformas" id="seccionPlataformas">
+        <div class="titulo-seccion" id="tituloPlataformas">🌐 ¿Dónde quieres dejar tu opinión?</div>
+        
+        <!-- INSTRUCCIÓN CLARA Y CORTA -->
+        <div class="instruccion" id="instruccion">
+            ⚠️ <strong>¡IMPORTANTE!</strong> Antes de elegir la plataforma, haz clic en <strong>"📋 Copiar nombre"</strong>.<br>
+            Luego, cuando escribas tu reseña, <strong>PEGA el nombre</strong> para que sepa quién te atendió.
+        </div>
+
+        <div class="texto-copiar" id="textoParaCopiar">CARGANDO...</div>
+        <button class="boton-copiar" id="btnCopiar">📋 Copiar nombre</button>
+
+        <div class="plataformas-grid">
+            <button class="boton-plataforma google" id="btnGoogle">
+                <span>⭐</span> Google
+            </button>
+            <button class="boton-plataforma booking" id="btnBooking">
+                <span>🏨</span> Booking
+            </button>
+            <button class="boton-plataforma tripadvisor" id="btnTripadvisor">
+                <span>🗺️</span> TripAdvisor
+            </button>
+            <button class="boton-plataforma expedia" id="btnExpedia">
+                <span>✈️</span> Expedia
+            </button>
+        </div>
+        
+        <button class="boton-reiniciar" id="btnReiniciar">← Cambiar de hotel</button>
+    </div>
+
+    <footer id="footer">1️⃣ Elige el hotel | 2️⃣ Copia el nombre | 3️⃣ Elige plataforma y pega</footer>
+</div>
+
+<div id="toast" class="toast">✅ Nombre copiado</div>
+
+<script>
+    // ========================
+    // LISTA DE HOTELES
+    // ========================
+    const hoteles = [
+        {
+            id: 1,
+            nombre: "Hotel Murillo",
+            nombreEn: "Hotel Murillo",
+            imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/348442875.jpg?k=c694a14eec559dd8ea96b5913dfb540522442bed4d7173542af7251be2c453fc&o=",
+            urlGoogle: "https://www.google.es/travel/hotels/entity/ChgI86CK3Oe71qNTGgwvZy8xaGh2cG54NnMQAQ/reviews?utm_campaign=sharing&utm_medium=link&utm_source=htls&ts=CAEaIAoCGgASGhIUCgcI6g8QBRgfEgcI6g8QBhgBGAEyAhAAKgkKBToDVVNEGgA&ei=oqOWaaTNBbCxlsYP3aOd0AU&sa=X",
+            urlBooking: "https://www.booking.com/hotel/es/murillo.es.html",
+            busqueda: "Hotel Murillo Sevilla"
+        }
+    ];
+
+    // ========================
+    // OBTENER DATOS DEL QR
+    // ========================
+    function obtenerParametrosURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const trabajador = urlParams.get('trabajador');
+        
+        // Si no hay trabajador en la URL, mostrar un mensaje de ejemplo
+        let nombreTrabajador = 'María José';
+        if (trabajador && trabajador !== 'Trabajador') {
+            nombreTrabajador = decodeURIComponent(trabajador);
+        }
+        
+        return {
+            trabajador: nombreTrabajador,
+            idioma: urlParams.get('idioma') || 'es'
+        };
+    }
+
+    const datos = obtenerParametrosURL();
+    let idiomaActual = datos.idioma;
+    let hotelSeleccionado = null;
+
+    document.getElementById('nombreTrabajador').innerText = datos.trabajador;
+
+    // ========================
+    // TEXTOS EN DOS IDIOMAS
+    // ========================
+    const textos = {
+        es: {
+            titulo: "📝 ¿Dónde fuiste atendida?",
+            tituloHoteles: "🏨 Elige el hotel donde te alojaste",
+            tituloPlataformas: "🌐 ¿Dónde quieres dejar tu opinión?",
+            atendido: "Atendida por:",
+            copiarBoton: "📋 Copiar nombre",
+            instruccion: `⚠️ ¡IMPORTANTE! Antes de elegir la plataforma, haz clic en "📋 Copiar nombre". Luego, cuando escribas tu reseña, PEGA el nombre para que sepa quién te atendió.`,
+            google: "Google",
+            booking: "Booking",
+            tripadvisor: "TripAdvisor",
+            expedia: "Expedia",
+            footer: "1️⃣ Elige el hotel | 2️⃣ Copia el nombre | 3️⃣ Elige plataforma y pega",
+            cambiarHotel: "← Cambiar de hotel",
+            toast: "✅ Nombre copiado"
+        },
+        en: {
+            titulo: "📝 Where were you served?",
+            tituloHoteles: "🏨 Choose the hotel you stayed at",
+            tituloPlataformas: "🌐 Where do you want to leave your review?",
+            atendido: "Served by:",
+            copiarBoton: "📋 Copy name",
+            instruccion: `⚠️ IMPORTANT! Before choosing the platform, click "📋 Copy name". Then, when you write your review, PASTE the name so everyone knows who served you.`,
+            google: "Google",
+            booking: "Booking",
+            tripadvisor: "TripAdvisor",
+            expedia: "Expedia",
+            footer: "1️⃣ Choose hotel | 2️⃣ Copy name | 3️⃣ Choose platform and paste",
+            cambiarHotel: "← Change hotel",
+            toast: "✅ Name copied"
+        }
+    };
+
+    function obtenerTextoCompleto() {
+        if (idiomaActual === 'es') {
+            return `Atendida por ${datos.trabajador}: `;
+        } else {
+            return `Served by ${datos.trabajador}: `;
+        }
+    }
+
+    function actualizarTextos() {
+        const t = textos[idiomaActual];
+        document.getElementById('titulo').innerText = t.titulo;
+        document.getElementById('tituloHoteles').innerText = t.tituloHoteles;
+        document.getElementById('tituloPlataformas').innerText = t.tituloPlataformas;
+        document.getElementById('trabajadorDiv').innerHTML = `👩 ${t.atendido} <strong>${datos.trabajador}</strong>`;
+        document.getElementById('btnCopiar').innerHTML = t.copiarBoton;
+        document.getElementById('instruccion').innerHTML = t.instruccion;
+        document.getElementById('btnGoogle').innerHTML = `<span>⭐</span> ${t.google}`;
+        document.getElementById('btnBooking').innerHTML = `<span>🏨</span> ${t.booking}`;
+        document.getElementById('btnTripadvisor').innerHTML = `<span>🗺️</span> ${t.tripadvisor}`;
+        document.getElementById('btnExpedia').innerHTML = `<span>✈️</span> ${t.expedia}`;
+        document.getElementById('footer').innerHTML = t.footer;
+        document.getElementById('btnReiniciar').innerHTML = t.cambiarHotel;
+        
+        if (hotelSeleccionado) {
+            document.getElementById('textoParaCopiar').innerText = obtenerTextoCompleto();
+        }
+        
+        if (idiomaActual === 'es') {
+            document.getElementById('btnEs').style.background = '#2c3e6e';
+            document.getElementById('btnEs').style.color = 'white';
+            document.getElementById('btnEn').style.background = '#ddd';
+            document.getElementById('btnEn').style.color = '#333';
+        } else {
+            document.getElementById('btnEn').style.background = '#2c3e6e';
+            document.getElementById('btnEn').style.color = 'white';
+            document.getElementById('btnEs').style.background = '#ddd';
+            document.getElementById('btnEs').style.color = '#333';
+        }
+        
+        document.querySelectorAll('.hotel-card').forEach(card => {
+            const hotelId = parseInt(card.dataset.id);
+            const hotel = hoteles.find(h => h.id === hotelId);
+            if (hotel) {
+                const nombreElem = card.querySelector('.hotel-nombre');
+                if (nombreElem) {
+                    nombreElem.innerText = idiomaActual === 'es' ? hotel.nombre : hotel.nombreEn;
+                }
+            }
+        });
+    }
+
+    function cargarHoteles() {
+        const grid = document.getElementById('hotelesGrid');
+        grid.innerHTML = '';
+        
+        hoteles.forEach(hotel => {
+            const card = document.createElement('div');
+            card.className = 'hotel-card';
+            card.dataset.id = hotel.id;
+            
+            card.innerHTML = `
+                <img class="hotel-imagen" src="${hotel.imagen}" alt="${hotel.nombre}" 
+                     onerror="this.src='https://placehold.co/400x300/cccccc/white?text=Hotel'">
+                <div class="hotel-nombre">${idiomaActual === 'es' ? hotel.nombre : hotel.nombreEn}</div>
+            `;
+            
+            card.onclick = () => seleccionarHotel(hotel);
+            grid.appendChild(card);
+        });
+    }
+
+    function seleccionarHotel(hotel) {
+        hotelSeleccionado = hotel;
+        
+        document.querySelectorAll('.hotel-card').forEach(card => {
+            card.classList.remove('seleccionado');
+            if (parseInt(card.dataset.id) === hotel.id) {
+                card.classList.add('seleccionado');
+            }
+        });
+        
+        document.getElementById('textoParaCopiar').innerText = obtenerTextoCompleto();
+        document.getElementById('seccionPlataformas').style.display = 'block';
+        document.getElementById('seccionPlataformas').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function mostrarToast() {
+        const toast = document.getElementById('toast');
+        toast.innerText = textos[idiomaActual].toast;
+        toast.classList.add('mostrar');
+        setTimeout(() => {
+            toast.classList.remove('mostrar');
+        }, 2000);
+    }
+
+    function copiarTexto() {
+        if (!hotelSeleccionado) {
+            alert(idiomaActual === 'es' ? 'Primero elige un hotel' : 'First select a hotel');
+            return;
+        }
+        const texto = obtenerTextoCompleto();
+        navigator.clipboard.writeText(texto).then(() => {
+            mostrarToast();
+        }).catch(() => {
+            alert(idiomaActual === 'es' ? 'No se pudo copiar' : 'Could not copy');
+        });
+    }
+
+    document.getElementById('btnCopiar').onclick = copiarTexto;
+    document.getElementById('textoParaCopiar').onclick = copiarTexto;
+
+    function abrirPlataforma(plataforma) {
+        if (!hotelSeleccionado) {
+            alert(idiomaActual === 'es' ? 'Primero elige un hotel' : 'First select a hotel');
+            return;
+        }
+        
+        let url = '';
+        switch(plataforma) {
+            case 'google':
+                url = hotelSeleccionado.urlGoogle;
+                break;
+            case 'booking':
+                url = hotelSeleccionado.urlBooking;
+                break;
+            case 'tripadvisor':
+                url = `https://www.tripadvisor.com/Search?q=${encodeURIComponent(hotelSeleccionado.busqueda)}`;
+                break;
+            case 'expedia':
+                url = `https://www.expedia.com/Hotel-Search?destination=${encodeURIComponent(hotelSeleccionado.busqueda)}`;
+                break;
+        }
+        window.open(url, '_blank');
+    }
+    
+    document.getElementById('btnGoogle').onclick = () => abrirPlataforma('google');
+    document.getElementById('btnBooking').onclick = () => abrirPlataforma('booking');
+    document.getElementById('btnTripadvisor').onclick = () => abrirPlataforma('tripadvisor');
+    document.getElementById('btnExpedia').onclick = () => abrirPlataforma('expedia');
+    
+    document.getElementById('btnReiniciar').onclick = () => {
+        hotelSeleccionado = null;
+        document.getElementById('seccionPlataformas').style.display = 'none';
+        document.querySelectorAll('.hotel-card').forEach(card => {
+            card.classList.remove('seleccionado');
+        });
+        document.getElementById('hotelesGrid').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    document.getElementById('btnEs').onclick = () => { 
+        idiomaActual = 'es'; 
+        actualizarTextos();
+        cargarHoteles();
+        if (hotelSeleccionado) {
+            document.getElementById('textoParaCopiar').innerText = obtenerTextoCompleto();
+        }
+    };
+    
+    document.getElementById('btnEn').onclick = () => { 
+        idiomaActual = 'en'; 
+        actualizarTextos();
+        cargarHoteles();
+        if (hotelSeleccionado) {
+            document.getElementById('textoParaCopiar').innerText = obtenerTextoCompleto();
+        }
+    };
+    
+    cargarHoteles();
+    actualizarTextos();
+</script>
+
+</body>
+</html>
