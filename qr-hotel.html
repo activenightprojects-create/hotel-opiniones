@@ -23,7 +23,6 @@
             position: relative;
         }
 
-        /* Patrón de fondo elegante */
         body::before {
             content: "";
             position: fixed;
@@ -49,35 +48,24 @@
             transition: transform 0.2s ease;
         }
 
-        .logo-marca {
+        /* Logo del hotel */
+        .logo-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 8px;
             margin-bottom: 16px;
         }
-
-        .logo-icono {
-            font-size: 28px;
-            background: #1e3a5f;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 30px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        .logo-hotel {
+            max-width: 180px;
+            width: 100%;
+            height: auto;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 60px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s;
         }
-
-        h1 {
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #1e3a5f 0%, #2c5a8c 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-            margin-bottom: 6px;
+        .logo-hotel:hover {
+            transform: scale(1.02);
         }
 
         .subtitulo {
@@ -87,6 +75,7 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         .trabajador {
@@ -341,10 +330,11 @@
 <body>
 
 <div class="container">
-    <div class="logo-marca">
-        <div class="logo-icono">🏨✨</div>
+    <!-- LOGO DEL HOTEL -->
+    <div class="logo-container">
+        <img class="logo-hotel" src="https://i.imgur.com/3qxpP4z.png" alt="Hotel Murillo - Barrio de Santa Cruz">
     </div>
-    <h1>Grupo Murillo</h1>
+
     <div class="subtitulo" id="subtitulo">hoteles con alma en Sevilla</div>
 
     <div class="idioma-selector">
