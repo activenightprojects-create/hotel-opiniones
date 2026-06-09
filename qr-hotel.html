@@ -146,10 +146,6 @@
             font-weight: normal;
         }
 
-        .instruccion strong {
-            color: #d32f2f;
-        }
-
         .plataformas-grid {
             display: flex;
             flex-direction: column;
@@ -275,7 +271,6 @@
     <div class="seccion-plataformas" id="seccionPlataformas">
         <div class="titulo-seccion" id="tituloPlataformas">🌐 ¿Dónde quieres dejar tu opinión?</div>
         
-        <!-- INSTRUCCIÓN CLARA Y CORTA -->
         <div class="instruccion" id="instruccion">
             ⚠️ <strong>¡IMPORTANTE!</strong> Antes de elegir la plataforma, haz clic en <strong>"📋 Copiar nombre"</strong>.<br>
             Luego, cuando escribas tu reseña, <strong>PEGA el nombre</strong> para que sepa quién te atendió.
@@ -309,7 +304,7 @@
 
 <script>
     // ========================
-    // LISTA DE HOTELES
+    // LISTA DE 5 HOTELES
     // ========================
     const hoteles = [
         {
@@ -317,9 +312,45 @@
             nombre: "Hotel Murillo",
             nombreEn: "Hotel Murillo",
             imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/348442875.jpg?k=c694a14eec559dd8ea96b5913dfb540522442bed4d7173542af7251be2c453fc&o=",
-            urlGoogle: "https://www.google.es/travel/hotels/entity/ChgI86CK3Oe71qNTGgwvZy8xaGh2cG54NnMQAQ/reviews?utm_campaign=sharing&utm_medium=link&utm_source=htls&ts=CAEaIAoCGgASGhIUCgcI6g8QBRgfEgcI6g8QBhgBGAEyAhAAKgkKBToDVVNEGgA&ei=oqOWaaTNBbCxlsYP3aOd0AU&sa=X",
+            urlGoogle: "https://www.google.es/travel/hotels/entity/ChgI86CK3Oe71qNTGgwvZy8xaGh2cG54NnMQAQ/reviews",
             urlBooking: "https://www.booking.com/hotel/es/murillo.es.html",
             busqueda: "Hotel Murillo Sevilla"
+        },
+        {
+            id: 2,
+            nombre: "Hotel Murillo Reinoso",
+            nombreEn: "Hotel Murillo Reinoso",
+            imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/692135323.jpg?k=84d540cf7703f677a2df34660299d1ed86a02d3135ad795475e4b839ddc3ad2b&o=",
+            urlGoogle: "https://www.google.com/travel/search?q=hotel%20murillo%20reinoso&gsas=1&ts=CAESCAoCCAMKAggDKgcKBToDRVVS&qs=CAAgACgA&ap=MAC6AQdyZXZpZXdz",
+            urlBooking: "https://www.booking.com/hotel/es/hotel-murilloreinoso.es.html",
+            busqueda: "Hotel Murillo Reinoso Sevilla"
+        },
+        {
+            id: 3,
+            nombre: "Suite Murillo Plaza Santa Cruz",
+            nombreEn: "Suite Murillo Plaza Santa Cruz",
+            imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/210039527.jpg?k=b667eeadb6ad0622486b1357a768a63f70f4cfe345c656ce497c5dbed8ab8e28&o=",
+            urlGoogle: "https://www.google.com/travel/search?gsas=1&ts=EggKAggDCgIIAxocEhoSFAoHCOoPEAkYAxIHCOoPEAkYBBgBMgIQAA&qs=MhNDZ29Jd2JUX3dvSEpwTzlURUFFOAI&ap=ugEHcmV2aWV3cw",
+            urlBooking: "https://www.booking.com/hotel/es/suites-murillo-plaza-sta-cruz.es.html",
+            busqueda: "Suite Murillo Plaza Santa Cruz Sevilla"
+        },
+        {
+            id: 4,
+            nombre: "Suites Murillo Alcázar",
+            nombreEn: "Suites Murillo Alcázar",
+            imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/14276672.jpg?k=22cca70c388f39711ef0688d25c12a1058234ad094d7c0e247519b1357fd8e6a&o=",
+            urlGoogle: "https://www.google.com/travel/search?q=suites%20murillo%20alc%C3%A1zar%20sevilla&gsas=1&ts=CAESCAoCCAMKAggDKgcKBToDRVVS&qs=CAAgASgAMidDaGtJNHJIN2xjWE1oLXFOQVJvTUwyY3ZNWEJ3TW5nMVoyZzVFQUU&ap=MAC6AQdyZXZpZXdz",
+            urlBooking: "https://www.booking.com/hotel/es/suites-murillo.es.html",
+            busqueda: "Suites Murillo Alcázar Sevilla"
+        },
+        {
+            id: 5,
+            nombre: "Suites Murillo Catedral",
+            nombreEn: "Suites Murillo Catedral",
+            imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/692135323.jpg?k=84d540cf7703f677a2df34660299d1ed86a02d3135ad795475e4b839ddc3ad2b&o=",
+            urlGoogle: "https://www.google.com/travel/search?q=suites%20murillo%20catedral&gsas=1&ts=CAESCAoCCAMKAggDKgcKBToDRVVS&qs=CAAgASgAMidDaGtJaHRxWXRaT1I4czByR2cwdlp5OHhNV016ZGpab2MyMHdFQUU&ap=MAC6AQdyZXZpZXdz",
+            urlBooking: "https://www.booking.com/hotel/es/suites-murillo-segovias.es.html",
+            busqueda: "Suites Murillo Catedral Sevilla"
         }
     ];
 
@@ -330,7 +361,6 @@
         const urlParams = new URLSearchParams(window.location.search);
         const trabajador = urlParams.get('trabajador');
         
-        // Si no hay trabajador en la URL, mostrar un mensaje de ejemplo
         let nombreTrabajador = 'María José';
         if (trabajador && trabajador !== 'Trabajador') {
             nombreTrabajador = decodeURIComponent(trabajador);
