@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Dejar opinión - Hoteles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Dejar opinión - Grupo Murillo</title>
     <style>
         * {
             margin: 0;
@@ -12,64 +12,81 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', Helvetica, Arial, sans-serif;
+            background: linear-gradient(145deg, #1a2a4f 0%, #0f1a33 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .container {
-            background: white;
-            border-radius: 25px;
-            padding: 30px 25px;
-            max-width: 650px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 32px;
+            padding: 24px 20px;
+            max-width: 550px;
             width: 100%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1);
             text-align: center;
+            backdrop-filter: blur(2px);
         }
 
         h1 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 22px;
+            background: linear-gradient(135deg, #1a2a4f 0%, #2d4a7a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .subtitulo {
+            color: #6c7a91;
+            font-size: 13px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eef2f7;
+            display: inline-block;
+            padding-bottom: 6px;
         }
 
         .trabajador {
-            background: #f0f4ff;
-            padding: 15px;
-            border-radius: 15px;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8edf9 100%);
+            padding: 16px;
+            border-radius: 24px;
             margin: 20px 0;
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e6e;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a2a4f;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02), 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.6);
         }
 
         .idioma-selector {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         .idioma-selector button {
-            padding: 6px 18px;
+            padding: 6px 20px;
             border: none;
-            border-radius: 30px;
+            border-radius: 40px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            background: #f0f2f5;
+            color: #4a5568;
         }
 
-        #btnEs {
-            background: #2c3e6e;
+        .idioma-selector button.active {
+            background: #1a2a4f;
             color: white;
-        }
-
-        #btnEn {
-            background: #ddd;
-            color: #333;
+            box-shadow: 0 4px 12px rgba(26, 42, 79, 0.3);
         }
 
         .seccion-hoteles {
@@ -77,80 +94,149 @@
         }
 
         .titulo-seccion {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #555;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1a2a4f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .hoteles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 14px;
+            margin-bottom: 20px;
         }
 
         .hotel-card {
             background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
+            border: 1px solid #e9edf2;
+            border-radius: 20px;
             padding: 12px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.25s ease;
             text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         }
 
         .hotel-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px -10px rgba(0,0,0,0.15);
+            border-color: #cbd5e1;
         }
 
         .hotel-card.seleccionado {
-            border-color: #667eea;
-            background: #f0f4ff;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            border-color: #1a2a4f;
+            background: #f8fafd;
+            box-shadow: 0 8px 20px -8px rgba(26, 42, 79, 0.25);
+            transform: scale(1.01);
         }
 
         .hotel-imagen {
             width: 100%;
-            height: 120px;
+            height: 110px;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 16px;
             margin-bottom: 10px;
-            background: #f5f5f5;
+            background: #f1f5f9;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
 
         .hotel-nombre {
-            font-weight: bold;
-            color: #333;
-            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 13px;
+            line-height: 1.3;
         }
 
         .seccion-plataformas {
             display: none;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px dashed #ddd;
+            margin-top: 28px;
+            padding-top: 24px;
+            border-top: 2px solid #eef2f7;
+            animation: fadeInUp 0.3s ease;
         }
 
-        .instruccion {
-            background: #fff3cd;
-            padding: 15px;
-            border-radius: 12px;
-            margin: 10px 0 15px 0;
-            font-size: 15px;
-            color: #856404;
-            border-left: 4px solid #ffc107;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .aviso-copiar {
+            background: #eef2ff;
+            padding: 14px 16px;
+            border-radius: 20px;
+            margin: 16px 0;
+            font-size: 14px;
+            color: #1e3a8a;
+            border-left: 5px solid #1a2a4f;
             text-align: left;
-            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .aviso-copiar span {
+            font-size: 24px;
+        }
+
+        .texto-copiar {
+            background: #f8fafc;
+            padding: 14px;
+            border-radius: 20px;
+            margin: 12px 0;
+            font-size: 16px;
+            cursor: pointer;
+            word-break: break-word;
+            font-weight: 600;
+            color: #1a2a4f;
+            border: 1px dashed #cbd5e1;
+            transition: all 0.2s;
+        }
+
+        .texto-copiar:active {
+            background: #eef2ff;
+        }
+
+        .boton-copiar {
+            background: linear-gradient(135deg, #1a2a4f 0%, #2d4a7a 100%);
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 60px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 8px 0 12px;
+            transition: all 0.2s;
+            width: 100%;
+            box-shadow: 0 6px 14px rgba(26, 42, 79, 0.25);
+        }
+
+        .boton-copiar:active {
+            transform: scale(0.97);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
 
         .plataformas-grid {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin: 15px 0;
+            margin: 18px 0;
         }
 
         .boton-plataforma {
@@ -160,17 +246,18 @@
             gap: 12px;
             padding: 14px;
             border: none;
-            border-radius: 50px;
+            border-radius: 60px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.2s;
             background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border: 1px solid #e9edf2;
         }
 
-        .boton-plataforma:hover {
-            transform: scale(1.02);
+        .boton-plataforma:active {
+            transform: scale(0.98);
         }
 
         .google { border-left: 5px solid #4285F4; }
@@ -178,37 +265,28 @@
         .tripadvisor { border-left: 5px solid #00A680; }
         .expedia { border-left: 5px solid #FF6600; }
 
-        .boton-copiar {
-            background: #2c3e6e;
-            color: white;
-            padding: 14px 24px;
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
+        .boton-reiniciar {
+            background: none;
+            color: #6c7a91;
+            padding: 10px 18px;
+            border: 1px solid #e2e8f0;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 0;
-            transition: all 0.3s;
+            margin-top: 16px;
+            transition: all 0.2s;
         }
 
-        .boton-copiar:hover {
-            background: #1e2b4a;
-            transform: scale(1.02);
+        .boton-reiniciar:active {
+            background: #f1f5f9;
         }
 
-        .texto-copiar {
-            background: #f5f5f5;
-            padding: 12px;
-            border-radius: 12px;
-            margin: 10px 0;
-            font-size: 16px;
-            cursor: pointer;
-            word-break: break-word;
-            font-weight: bold;
-            color: #2c3e6e;
+        footer {
+            margin-top: 24px;
+            font-size: 11px;
+            color: #94a3b8;
+            text-align: center;
         }
 
         .toast {
@@ -216,75 +294,75 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: #2c3e6e;
+            background: #1a2a4f;
             color: white;
             padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 16px;
+            border-radius: 60px;
+            font-size: 15px;
+            font-weight: 500;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.25s;
             pointer-events: none;
             z-index: 1000;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
         .toast.mostrar {
             opacity: 1;
         }
 
-        .boton-reiniciar {
-            background: #ddd;
-            color: #333;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 30px;
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 15px;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
 
-        footer {
-            margin-top: 20px;
-            font-size: 11px;
-            color: #999;
+        .aviso-copiar {
+            animation: pulse 0.6s ease;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1 id="titulo">📝 ¿Dónde fuiste atendida?</h1>
+    <h1>✨ Grupo Murillo ✨</h1>
+    <div class="subtitulo" id="subtitulo">hoteles con encanto en Sevilla</div>
     
     <div class="idioma-selector">
-        <button id="btnEs">🇪🇸 Español</button>
-        <button id="btnEn">🇬🇧 English</button>
+        <button id="btnEs" class="active">🇪🇸 ESP</button>
+        <button id="btnEn">🇬🇧 ENG</button>
     </div>
 
     <div class="trabajador" id="trabajadorDiv">
-        👩 Atendida por: <strong id="nombreTrabajador">CARGANDO...</strong>
+        👩 <span id="atendidoTexto">Atendida por:</span> <strong id="nombreTrabajador">CARGANDO...</strong>
     </div>
 
     <div class="seccion-hoteles">
-        <div class="titulo-seccion" id="tituloHoteles">🏨 Elige el hotel donde te alojaste</div>
+        <div class="titulo-seccion" id="tituloHoteles">
+            🏨 Selecciona tu hotel
+        </div>
         <div class="hoteles-grid" id="hotelesGrid"></div>
     </div>
 
     <div class="seccion-plataformas" id="seccionPlataformas">
-        <div class="titulo-seccion" id="tituloPlataformas">🌐 ¿Dónde quieres dejar tu opinión?</div>
+        <div class="titulo-seccion" id="tituloPlataformas">🌐 ¿Dónde dejar tu opinión?</div>
         
-        <div class="instruccion" id="instruccion">
-            ⚠️ <strong>¡IMPORTANTE!</strong> Antes de elegir la plataforma, haz clic en <strong>"📋 Copiar nombre"</strong>.<br>
-            Luego, cuando escribas tu reseña, <strong>PEGA el nombre</strong> para que sepa quién te atendió.
+        <!-- Aviso que aparece automáticamente al abrir tras elegir hotel -->
+        <div class="aviso-copiar" id="avisoCopiar">
+            <span>📋</span> <span id="avisoTexto">¡Copia el nombre antes de escribir tu reseña!</span>
         </div>
 
         <div class="texto-copiar" id="textoParaCopiar">CARGANDO...</div>
-        <button class="boton-copiar" id="btnCopiar">📋 Copiar nombre</button>
+        <button class="boton-copiar" id="btnCopiar">
+            📋 <span id="btnCopiarTexto">Copiar nombre</span>
+        </button>
 
         <div class="plataformas-grid">
             <button class="boton-plataforma google" id="btnGoogle">
                 <span>⭐</span> Google
             </button>
             <button class="boton-plataforma booking" id="btnBooking">
-                <span>🏨</span> Booking
+                <span>🏨</span> Booking.com
             </button>
             <button class="boton-plataforma tripadvisor" id="btnTripadvisor">
                 <span>🗺️</span> TripAdvisor
@@ -297,7 +375,7 @@
         <button class="boton-reiniciar" id="btnReiniciar">← Cambiar de hotel</button>
     </div>
 
-    <footer id="footer">1️⃣ Elige el hotel | 2️⃣ Copia el nombre | 3️⃣ Elige plataforma y pega</footer>
+    <footer>1️⃣ Elige hotel | 2️⃣ Copia el nombre | 3️⃣ Elige plataforma y pega</footer>
 </div>
 
 <div id="toast" class="toast">✅ Nombre copiado</div>
@@ -355,26 +433,38 @@
     ];
 
     // ========================
-    // OBTENER DATOS DEL QR
+    // DETECTAR IDIOMA DEL DISPOSITIVO
     // ========================
+    function detectarIdiomaDispositivo() {
+        const idiomaNavegador = navigator.language || navigator.userLanguage;
+        if (idiomaNavegador.startsWith('es')) return 'es';
+        if (idiomaNavegador.startsWith('en')) return 'en';
+        return 'es'; // Por defecto español
+    }
+
     function obtenerParametrosURL() {
         const urlParams = new URLSearchParams(window.location.search);
-        const trabajador = urlParams.get('trabajador');
+        let trabajador = urlParams.get('trabajador');
+        let idiomaUrl = urlParams.get('idioma');
         
         let nombreTrabajador = 'María José';
-        if (trabajador && trabajador !== 'Trabajador') {
+        if (trabajador && trabajador !== 'Trabajador' && trabajador !== 'null') {
             nombreTrabajador = decodeURIComponent(trabajador);
         }
         
+        // Prioridad: 1° URL, 2° dispositivo, 3° español
+        let idiomaFinal = idiomaUrl ? idiomaUrl : detectarIdiomaDispositivo();
+        
         return {
             trabajador: nombreTrabajador,
-            idioma: urlParams.get('idioma') || 'es'
+            idioma: idiomaFinal
         };
     }
 
     const datos = obtenerParametrosURL();
     let idiomaActual = datos.idioma;
     let hotelSeleccionado = null;
+    let avisoMostrado = false;
 
     document.getElementById('nombreTrabajador').innerText = datos.trabajador;
 
@@ -383,34 +473,38 @@
     // ========================
     const textos = {
         es: {
-            titulo: "📝 ¿Dónde fuiste atendida?",
-            tituloHoteles: "🏨 Elige el hotel donde te alojaste",
-            tituloPlataformas: "🌐 ¿Dónde quieres dejar tu opinión?",
+            subtitulo: "hoteles con encanto en Sevilla",
             atendido: "Atendida por:",
-            copiarBoton: "📋 Copiar nombre",
-            instruccion: `⚠️ ¡IMPORTANTE! Antes de elegir la plataforma, haz clic en "📋 Copiar nombre". Luego, cuando escribas tu reseña, PEGA el nombre para que sepa quién te atendió.`,
+            tituloHoteles: "🏨 Selecciona tu hotel",
+            tituloPlataformas: "🌐 ¿Dónde dejar tu opinión?",
+            aviso: `📋 ¡Copia el nombre de ${datos.trabajador} antes de escribir tu reseña!`,
+            copiarBoton: "Copiar nombre",
+            textoParaCopiar: `Atendida por ${datos.trabajador}: `,
             google: "Google",
-            booking: "Booking",
+            booking: "Booking.com",
             tripadvisor: "TripAdvisor",
             expedia: "Expedia",
-            footer: "1️⃣ Elige el hotel | 2️⃣ Copia el nombre | 3️⃣ Elige plataforma y pega",
+            footer: "1️⃣ Elige hotel | 2️⃣ Copia el nombre | 3️⃣ Elige plataforma y pega",
             cambiarHotel: "← Cambiar de hotel",
-            toast: "✅ Nombre copiado"
+            toast: "✅ Nombre copiado",
+            sinHotel: "Primero elige un hotel"
         },
         en: {
-            titulo: "📝 Where were you served?",
-            tituloHoteles: "🏨 Choose the hotel you stayed at",
-            tituloPlataformas: "🌐 Where do you want to leave your review?",
+            subtitulo: "charming hotels in Seville",
             atendido: "Served by:",
-            copiarBoton: "📋 Copy name",
-            instruccion: `⚠️ IMPORTANT! Before choosing the platform, click "📋 Copy name". Then, when you write your review, PASTE the name so everyone knows who served you.`,
+            tituloHoteles: "🏨 Select your hotel",
+            tituloPlataformas: "🌐 Where to leave your review?",
+            aviso: `📋 Copy ${datos.trabajador}'s name before writing your review!`,
+            copiarBoton: "Copy name",
+            textoParaCopiar: `Served by ${datos.trabajador}: `,
             google: "Google",
-            booking: "Booking",
+            booking: "Booking.com",
             tripadvisor: "TripAdvisor",
             expedia: "Expedia",
             footer: "1️⃣ Choose hotel | 2️⃣ Copy name | 3️⃣ Choose platform and paste",
             cambiarHotel: "← Change hotel",
-            toast: "✅ Name copied"
+            toast: "✅ Name copied",
+            sinHotel: "First select a hotel"
         }
     };
 
@@ -424,12 +518,13 @@
 
     function actualizarTextos() {
         const t = textos[idiomaActual];
-        document.getElementById('titulo').innerText = t.titulo;
-        document.getElementById('tituloHoteles').innerText = t.tituloHoteles;
-        document.getElementById('tituloPlataformas').innerText = t.tituloPlataformas;
-        document.getElementById('trabajadorDiv').innerHTML = `👩 ${t.atendido} <strong>${datos.trabajador}</strong>`;
-        document.getElementById('btnCopiar').innerHTML = t.copiarBoton;
-        document.getElementById('instruccion').innerHTML = t.instruccion;
+        document.getElementById('subtitulo').innerText = t.subtitulo;
+        document.getElementById('atendidoTexto').innerText = t.atendido;
+        document.getElementById('tituloHoteles').innerHTML = t.tituloHoteles;
+        document.getElementById('tituloPlataformas').innerHTML = t.tituloPlataformas;
+        document.getElementById('avisoTexto').innerText = t.aviso;
+        document.getElementById('btnCopiarTexto').innerText = t.copiarBoton;
+        document.getElementById('textoParaCopiar').innerText = obtenerTextoCompleto();
         document.getElementById('btnGoogle').innerHTML = `<span>⭐</span> ${t.google}`;
         document.getElementById('btnBooking').innerHTML = `<span>🏨</span> ${t.booking}`;
         document.getElementById('btnTripadvisor').innerHTML = `<span>🗺️</span> ${t.tripadvisor}`;
@@ -437,20 +532,13 @@
         document.getElementById('footer').innerHTML = t.footer;
         document.getElementById('btnReiniciar').innerHTML = t.cambiarHotel;
         
-        if (hotelSeleccionado) {
-            document.getElementById('textoParaCopiar').innerText = obtenerTextoCompleto();
-        }
-        
+        // Marcar botón activo
         if (idiomaActual === 'es') {
-            document.getElementById('btnEs').style.background = '#2c3e6e';
-            document.getElementById('btnEs').style.color = 'white';
-            document.getElementById('btnEn').style.background = '#ddd';
-            document.getElementById('btnEn').style.color = '#333';
+            document.getElementById('btnEs').classList.add('active');
+            document.getElementById('btnEn').classList.remove('active');
         } else {
-            document.getElementById('btnEn').style.background = '#2c3e6e';
-            document.getElementById('btnEn').style.color = 'white';
-            document.getElementById('btnEs').style.background = '#ddd';
-            document.getElementById('btnEs').style.color = '#333';
+            document.getElementById('btnEn').classList.add('active');
+            document.getElementById('btnEs').classList.remove('active');
         }
         
         document.querySelectorAll('.hotel-card').forEach(card => {
@@ -511,7 +599,7 @@
 
     function copiarTexto() {
         if (!hotelSeleccionado) {
-            alert(idiomaActual === 'es' ? 'Primero elige un hotel' : 'First select a hotel');
+            alert(textos[idiomaActual].sinHotel);
             return;
         }
         const texto = obtenerTextoCompleto();
@@ -527,7 +615,7 @@
 
     function abrirPlataforma(plataforma) {
         if (!hotelSeleccionado) {
-            alert(idiomaActual === 'es' ? 'Primero elige un hotel' : 'First select a hotel');
+            alert(textos[idiomaActual].sinHotel);
             return;
         }
         
