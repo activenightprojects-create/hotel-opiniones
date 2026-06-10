@@ -309,6 +309,14 @@
             font-weight: 500;
         }
 
+        .footer-creditos {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            color: #b89a7a;
+        }
+
         .toast {
             position: fixed;
             bottom: 30px;
@@ -374,13 +382,16 @@
         <button class="boton-reiniciar" id="btnReiniciar">← Cambiar de hotel</button>
     </div>
 
-    <footer>1️⃣ Elige hotel | 2️⃣ Copia el nombre | 3️⃣ Elige plataforma y pega</footer>
+    <footer>
+        1️⃣ Elige hotel | 2️⃣ Copia el nombre | 3️⃣ Elige plataforma y pega<br>
+        <span class="footer-creditos">✨ Desarrollado con dedicación por Equipo Nocturno ✨</span>
+    </footer>
 </div>
 <div id="toast" class="toast">✅ Nombre copiado</div>
 
 <script>
     // ========================
-    // LISTA DE HOTELES CON NUEVOS ENLACES DE BOOKING
+    // LISTA DE HOTELES CON TODOS LOS ENLACES
     // ========================
     const hoteles = [
         { 
