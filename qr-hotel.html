@@ -14,7 +14,9 @@
 
         body {
             font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
-            background: radial-gradient(circle at 10% 20%, #1e3a5f, #0a1628);
+            /* NUEVO FONDO PERGAMINO + TEXTURA SUTIL */
+            background: #e8dcc5;
+            background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 2px, transparent 2px, transparent 8px);
             min-height: 100vh;
             padding: 20px;
             display: flex;
@@ -23,6 +25,7 @@
             position: relative;
         }
 
+        /* Decoración opcional: veta muy suave de papel */
         body::before {
             content: "";
             position: fixed;
@@ -30,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIgZD0iTTAgMEw0MCA0ME0wIDQwTDQwIDAiLz48L3N2Zz4=');
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMCwwLDAsMC4wMikiIHN0cm9rZS13aWR0aD0iMC41IiBkPSJNMCAwTDQwIDQwTTAgNDBMNDAgMCIvPjwvc3ZnPg==');
             pointer-events: none;
             z-index: 0;
         }
@@ -41,11 +44,12 @@
             padding: 28px 24px;
             max-width: 560px;
             width: 100%;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(2px);
+            box-shadow: 0 30px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 248, 225, 0.6);
+            backdrop-filter: blur(0px);
             position: relative;
             z-index: 2;
             transition: transform 0.2s ease;
+            border: 1px solid rgba(210, 180, 140, 0.3);
         }
 
         /* Logo del hotel */
@@ -69,7 +73,7 @@
         }
 
         .subtitulo {
-            color: #5e6f8d;
+            color: #8b7355;
             font-size: 13px;
             font-weight: 500;
             letter-spacing: 0.5px;
@@ -79,26 +83,26 @@
         }
 
         .trabajador {
-            background: linear-gradient(115deg, #eef3fc 0%, #e2eaf5 100%);
+            background: linear-gradient(115deg, #fef9ef 0%, #faf3e6 100%);
             padding: 18px;
             border-radius: 32px;
             margin: 16px 0 24px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.6);
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02), 0 8px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(210, 180, 140, 0.4);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02), 0 8px 20px rgba(0,0,0,0.04);
         }
 
         .trabajador span {
             font-size: 22px;
             font-weight: 800;
-            color: #0f2b44;
+            color: #4a3728;
             display: block;
         }
 
         .badge-atencion {
             font-size: 14px;
             font-weight: 600;
-            color: #2c5a8c;
+            color: #8b7355;
             letter-spacing: 0.3px;
         }
 
@@ -117,22 +121,22 @@
             font-size: 13px;
             cursor: pointer;
             transition: all 0.2s;
-            background: #f0f2f7;
-            color: #435574;
+            background: #f0ebe2;
+            color: #4a3728;
             font-family: 'Inter', sans-serif;
         }
 
         .idioma-selector button.active {
-            background: #1e3a5f;
+            background: #8b7355;
             color: white;
-            box-shadow: 0 4px 12px rgba(30,58,95,0.3);
+            box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3);
         }
 
         .titulo-seccion {
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 18px;
-            color: #0f2b44;
+            color: #4a3728;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -153,21 +157,21 @@
             cursor: pointer;
             transition: all 0.25s;
             text-align: center;
-            border: 1px solid #eef2f8;
+            border: 1px solid #f0e2d4;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
 
         .hotel-card:hover {
             transform: translateY(-5px);
-            border-color: #cbdbe0;
-            box-shadow: 0 18px 28px -12px rgba(0,0,0,0.2);
+            border-color: #d4b896;
+            box-shadow: 0 18px 28px -12px rgba(0,0,0,0.15);
         }
 
         .hotel-card.seleccionado {
-            border: 2px solid #1e3a5f;
-            background: #f9fcff;
+            border: 2px solid #8b7355;
+            background: #fffcf8;
             transform: scale(1.01);
-            box-shadow: 0 12px 22px -10px #1e3a5f40;
+            box-shadow: 0 12px 22px -10px rgba(139, 115, 85, 0.3);
         }
 
         .hotel-imagen {
@@ -176,13 +180,13 @@
             object-fit: cover;
             border-radius: 22px;
             margin-bottom: 10px;
-            background: #edf2f7;
+            background: #f5efe6;
         }
 
         .hotel-nombre {
             font-weight: 700;
             font-size: 13px;
-            color: #1e2f46;
+            color: #4a3728;
             line-height: 1.35;
         }
 
@@ -198,11 +202,11 @@
         }
 
         .aviso-copiar {
-            background: linear-gradient(105deg, #fffbeb 0%, #fff6e0 100%);
+            background: linear-gradient(105deg, #fff8e7 0%, #fff2e0 100%);
             padding: 16px 14px;
             border-radius: 28px;
             margin: 12px 0 18px;
-            border-left: 6px solid #e6a017;
+            border-left: 6px solid #d4a373;
             display: flex;
             align-items: center;
             gap: 14px;
@@ -217,7 +221,7 @@
         }
 
         .texto-copiar {
-            background: #f4f9fe;
+            background: #fefaf5;
             padding: 16px;
             border-radius: 28px;
             margin: 8px 0;
@@ -225,13 +229,13 @@
             font-weight: 700;
             text-align: center;
             cursor: pointer;
-            color: #1e3a5f;
-            border: 1px dashed #b9d0e8;
+            color: #4a3728;
+            border: 1px dashed #d4b896;
             transition: all 0.2s;
         }
 
         .boton-copiar {
-            background: linear-gradient(95deg, #1e3a5f, #2d4e78);
+            background: linear-gradient(95deg, #8b7355, #6b5340);
             width: 100%;
             padding: 16px;
             border: none;
@@ -245,7 +249,7 @@
             gap: 12px;
             margin: 12px 0;
             cursor: pointer;
-            box-shadow: 0 10px 18px -6px #1e3a5f;
+            box-shadow: 0 10px 18px -6px rgba(107, 83, 64, 0.4);
             transition: all 0.2s;
         }
 
@@ -272,10 +276,10 @@
             font-size: 16px;
             border: none;
             background: white;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
             transition: 0.15s;
             cursor: pointer;
-            border: 1px solid #eef2f8;
+            border: 1px solid #f0e2d4;
         }
 
         .boton-plataforma:active {
@@ -289,7 +293,7 @@
 
         .boton-reiniciar {
             background: transparent;
-            border: 1px solid #cbdbe5;
+            border: 1px solid #d4b896;
             padding: 10px 16px;
             border-radius: 40px;
             font-size: 13px;
@@ -297,13 +301,13 @@
             margin-top: 12px;
             width: auto;
             cursor: pointer;
-            color: #2e4a73;
+            color: #6b5340;
         }
 
         footer {
             text-align: center;
             font-size: 11px;
-            color: #8a9bbb;
+            color: #b89a7a;
             margin-top: 28px;
             font-weight: 500;
         }
@@ -313,7 +317,7 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: #1e2f3e;
+            background: #4a3728;
             color: white;
             padding: 12px 24px;
             border-radius: 60px;
@@ -330,7 +334,7 @@
 <body>
 
 <div class="container">
-    <!-- LOGO DEL HOTEL - URL CORRECTA -->
+    <!-- LOGO DEL HOTEL -->
     <div class="logo-container">
         <img class="logo-hotel" src="https://raw.githubusercontent.com/activenightprojects-create/hotel-opiniones/main/unnamed.png" alt="Hotel Murillo - Barrio de Santa Cruz">
     </div>
