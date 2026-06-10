@@ -14,7 +14,6 @@
 
         body {
             font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
-            /* NUEVO FONDO PERGAMINO + TEXTURA SUTIL */
             background: #e8dcc5;
             background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 2px, transparent 2px, transparent 8px);
             min-height: 100vh;
@@ -25,7 +24,6 @@
             position: relative;
         }
 
-        /* Decoración opcional: veta muy suave de papel */
         body::before {
             content: "";
             position: fixed;
@@ -52,7 +50,6 @@
             border: 1px solid rgba(210, 180, 140, 0.3);
         }
 
-        /* Logo del hotel */
         .logo-container {
             display: flex;
             justify-content: center;
@@ -334,7 +331,6 @@
 <body>
 
 <div class="container">
-    <!-- LOGO DEL HOTEL -->
     <div class="logo-container">
         <img class="logo-hotel" src="https://raw.githubusercontent.com/activenightprojects-create/hotel-opiniones/main/unnamed.png" alt="Hotel Murillo - Barrio de Santa Cruz">
     </div>
@@ -347,7 +343,7 @@
     </div>
 
     <div class="trabajador">
-        <div class="badge-atencion" id="atendidoTexto">Atendida por</div>
+        <div class="badge-atencion" id="atendidoTexto">Atendido/a por</div>
         <span id="nombreTrabajador">CARGANDO...</span>
     </div>
 
@@ -383,12 +379,65 @@
 <div id="toast" class="toast">✅ Nombre copiado</div>
 
 <script>
+    // ========================
+    // LISTA DE HOTELES CON TODOS LOS ENLACES
+    // ========================
     const hoteles = [
-        { id: 1, nombre: "Hotel Murillo", nombreEn: "Hotel Murillo", imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/348442875.jpg?k=c694a14eec559dd8ea96b5913dfb540522442bed4d7173542af7251be2c453fc&o=", urlGoogle: "https://www.google.es/travel/hotels/entity/ChgI86CK3Oe71qNTGgwvZy8xaGh2cG54NnMQAQ/reviews", urlBooking: "https://www.booking.com/hotel/es/murillo.es.html", busqueda: "Hotel Murillo Sevilla" },
-        { id: 2, nombre: "Hotel Murillo Reinoso", nombreEn: "Hotel Murillo Reinoso", imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/692135323.jpg?k=84d540cf7703f677a2df34660299d1ed86a02d3135ad795475e4b839ddc3ad2b&o=", urlGoogle: "https://www.google.com/travel/search?q=hotel%20murillo%20reinoso&gsas=1&ts=CAESCAoCCAMKAggDKgcKBToDRVVS&qs=CAAgACgA&ap=MAC6AQdyZXZpZXdz", urlBooking: "https://www.booking.com/hotel/es/hotel-murilloreinoso.es.html", busqueda: "Hotel Murillo Reinoso Sevilla" },
-        { id: 3, nombre: "Suite Murillo Plaza Santa Cruz", nombreEn: "Suite Murillo Plaza Santa Cruz", imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/210039527.jpg?k=b667eeadb6ad0622486b1357a768a63f70f4cfe345c656ce497c5dbed8ab8e28&o=", urlGoogle: "https://www.google.com/travel/search?gsas=1&ts=EggKAggDCgIIAxocEhoSFAoHCOoPEAkYAxIHCOoPEAkYBBgBMgIQAA&qs=MhNDZ29Jd2JUX3dvSEpwTzlURUFFOAI&ap=ugEHcmV2aWV3cw", urlBooking: "https://www.booking.com/hotel/es/suites-murillo-plaza-sta-cruz.es.html", busqueda: "Suite Murillo Plaza Santa Cruz Sevilla" },
-        { id: 4, nombre: "Suites Murillo Alcázar", nombreEn: "Suites Murillo Alcázar", imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/14276672.jpg?k=22cca70c388f39711ef0688d25c12a1058234ad094d7c0e247519b1357fd8e6a&o=", urlGoogle: "https://www.google.com/travel/search?q=suites%20murillo%20alc%C3%A1zar%20sevilla&gsas=1&ts=CAESCAoCCAMKAggDKgcKBToDRVVS&qs=CAAgASgAMidDaGtJNHJIN2xjWE1oLXFOQVJvTUwyY3ZNWEJ3TW5nMVoyZzVFQUU&ap=MAC6AQdyZXZpZXdz", urlBooking: "https://www.booking.com/hotel/es/suites-murillo.es.html", busqueda: "Suites Murillo Alcázar Sevilla" },
-        { id: 5, nombre: "Suites Murillo Catedral", nombreEn: "Suites Murillo Catedral", imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/692135323.jpg?k=84d540cf7703f677a2df34660299d1ed86a02d3135ad795475e4b839ddc3ad2b&o=", urlGoogle: "https://www.google.com/travel/search?q=suites%20murillo%20catedral&gsas=1&ts=CAESCAoCCAMKAggDKgcKBToDRVVS&qs=CAAgASgAMidDaGtJaHRxWXRaT1I4czByR2cwdlp5OHhNV016ZGpab2MyMHdFQUU&ap=MAC6AQdyZXZpZXdz", urlBooking: "https://www.booking.com/hotel/es/suites-murillo-segovias.es.html", busqueda: "Suites Murillo Catedral Sevilla" }
+        { 
+            id: 1, 
+            nombre: "Hotel Murillo", 
+            nombreEn: "Hotel Murillo", 
+            imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/348442875.jpg?k=c694a14eec559dd8ea96b5913dfb540522442bed4d7173542af7251be2c453fc&o=", 
+            urlGoogle: "https://www.google.es/travel/hotels/entity/ChgI86CK3Oe71qNTGgwvZy8xaGh2cG54NnMQAQ/reviews", 
+            urlBooking: "https://www.booking.com/hotel/es/murillo.es.html",
+            urlTripadvisor: "https://www.tripadvisor.es/Hotel_Review-g187443-d238624-Reviews-Hotel_Murillo-Seville_Province_of_Seville_Andalucia.html",
+            urlExpedia: "https://www.expedia.es/Seville-Hoteles-Hotel-Murillo.h1426919.Informacion-Hotel",
+            busqueda: "Hotel Murillo Sevilla"
+        },
+        { 
+            id: 2, 
+            nombre: "Hotel Murillo Reinoso", 
+            nombreEn: "Hotel Murillo Reinoso", 
+            imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/692135323.jpg?k=84d540cf7703f677a2df34660299d1ed86a02d3135ad795475e4b839ddc3ad2b&o=", 
+            urlGoogle: "https://www.google.com/travel/search?q=hotel%20murillo%20reinoso&gsas=1&ts=CAESCAoCCAMKAggDKgcKBToDRVVS&qs=CAAgACgA&ap=MAC6AQdyZXZpZXdz", 
+            urlBooking: "https://www.booking.com/hotel/es/hotel-murilloreinoso.es.html",
+            urlTripadvisor: "https://www.tripadvisor.es/Hotel_Review-g187443-d33073968-Reviews-Hotel_Murillo_Reinoso-Seville_Province_of_Seville_Andalucia.html",
+            urlExpedia: "https://www.expedia.es/Seville-Hoteles-Apartamentos-Murillo.h1426950.Informacion-Hotel",
+            busqueda: "Hotel Murillo Reinoso Sevilla"
+        },
+        { 
+            id: 3, 
+            nombre: "Suite Murillo Plaza Santa Cruz", 
+            nombreEn: "Suite Murillo Plaza Santa Cruz", 
+            imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/210039527.jpg?k=b667eeadb6ad0622486b1357a768a63f70f4cfe345c656ce497c5dbed8ab8e28&o=", 
+            urlGoogle: "https://www.google.com/travel/search?gsas=1&ts=EggKAggDCgIIAxocEhoSFAoHCOoPEAkYAxIHCOoPEAkYBBgBMgIQAA&qs=MhNDZ29Jd2JUX3dvSEpwTzlURUFFOAI&ap=ugEHcmV2aWV3cw", 
+            urlBooking: "https://www.booking.com/hotel/es/suites-murillo-plaza-sta-cruz.es.html",
+            urlTripadvisor: "https://www.tripadvisor.es/Hotel_Review-g187443-d17508660-Reviews-Suites_Murillo_Plaza_de_Santa_Cruz-Seville_Province_of_Seville_Andalucia.html",
+            urlExpedia: "https://www.expedia.es/Seville-Hoteles-Suites-Murillo-Plaza-Sta-Cruz.h38344212.Informacion-Hotel",
+            busqueda: "Suite Murillo Plaza Santa Cruz Sevilla"
+        },
+        { 
+            id: 4, 
+            nombre: "Suites Murillo Alcázar", 
+            nombreEn: "Suites Murillo Alcázar", 
+            imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/14276672.jpg?k=22cca70c388f39711ef0688d25c12a1058234ad094d7c0e247519b1357fd8e6a&o=", 
+            urlGoogle: "https://www.google.com/travel/search?q=suites%20murillo%20alc%C3%A1zar%20sevilla&gsas=1&ts=CAESCAoCCAMKAggDKgcKBToDRVVS&qs=CAAgASgAMidDaGtJNHJIN2xjWE1oLXFOQVJvTUwyY3ZNWEJ3TW5nMVoyZzVFQUU&ap=MAC6AQdyZXZpZXdz", 
+            urlBooking: "https://www.booking.com/hotel/es/suites-murillo.es.html",
+            urlTripadvisor: "https://www.tripadvisor.es/Hotel_Review-g187443-d2323674-Reviews-Suites_Murillo_Alcazar-Seville_Province_of_Seville_Andalucia.html",
+            urlExpedia: "https://www.expedia.es/Seville-Hoteles-Suites-Murillo.h8151742.Informacion-Hotel",
+            busqueda: "Suites Murillo Alcázar Sevilla"
+        },
+        { 
+            id: 5, 
+            nombre: "Suites Murillo Catedral", 
+            nombreEn: "Suites Murillo Catedral", 
+            imagen: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/692135323.jpg?k=84d540cf7703f677a2df34660299d1ed86a02d3135ad795475e4b839ddc3ad2b&o=", 
+            urlGoogle: "https://www.google.com/travel/search?q=suites%20murillo%20catedral&gsas=1&ts=CAESCAoCCAMKAggDKgcKBToDRVVS&qs=CAAgASgAMidDaGtJaHRxWXRaT1I4czByR2cwdlp5OHhNV016ZGpab2MyMHdFQUU&ap=MAC6AQdyZXZpZXdz", 
+            urlBooking: "https://www.booking.com/hotel/es/suites-murillo-segovias.es.html",
+            urlTripadvisor: "https://www.tripadvisor.es/Hotel_Review-g187443-d8742288-Reviews-Suites_Murillo_Catedral-Seville_Province_of_Seville_Andalucia.html",
+            urlExpedia: "https://www.expedia.es/Seville-Hoteles-Suites-Murillo-Catedral.h12337639.Informacion-Hotel",
+            busqueda: "Suites Murillo Catedral Sevilla"
+        }
     ];
 
     function detectarIdiomaDispositivo() {
@@ -416,12 +465,11 @@
     const textos = {
         es: {
             subtitulo: "hoteles con alma en Sevilla",
-            atendidoTexto: "Atendida por",
+            atendidoTexto: "Atendido/a por",
             tituloHoteles: "🏨 Selecciona tu hotel",
             tituloPlataformas: "🌐 ¿Dónde dejar tu opinión?",
             avisoTexto: `📋 ¡Copia el nombre de ${datos.trabajador} antes de escribir tu reseña!`,
             copiarBoton: "Copiar nombre",
-            textoBase: `Atendida por ${datos.trabajador}: `,
             google: "⭐ Google",
             booking: "🏨 Booking.com",
             tripadvisor: "🗺️ TripAdvisor",
@@ -437,7 +485,6 @@
             tituloPlataformas: "🌐 Where to leave your review?",
             avisoTexto: `📋 Copy ${datos.trabajador}'s name before writing your review!`,
             copiarBoton: "Copy name",
-            textoBase: `Served by ${datos.trabajador}: `,
             google: "⭐ Google",
             booking: "🏨 Booking.com",
             tripadvisor: "🗺️ TripAdvisor",
@@ -449,7 +496,7 @@
     };
 
     function obtenerTextoCompleto() {
-        return idiomaActual === 'es' ? `Atendida por ${datos.trabajador}: ` : `Served by ${datos.trabajador}: `;
+        return idiomaActual === 'es' ? `Atendido/a por ${datos.trabajador}: ` : `Served by ${datos.trabajador}: `;
     }
 
     function aplicarTextoIdioma() {
@@ -512,8 +559,8 @@
         let url = '';
         if (tipo === 'google') url = hotelSeleccionado.urlGoogle;
         if (tipo === 'booking') url = hotelSeleccionado.urlBooking;
-        if (tipo === 'tripadvisor') url = `https://www.tripadvisor.com/Search?q=${encodeURIComponent(hotelSeleccionado.busqueda)}`;
-        if (tipo === 'expedia') url = `https://www.expedia.com/Hotel-Search?destination=${encodeURIComponent(hotelSeleccionado.busqueda)}`;
+        if (tipo === 'tripadvisor') url = hotelSeleccionado.urlTripadvisor;
+        if (tipo === 'expedia') url = hotelSeleccionado.urlExpedia;
         window.open(url, '_blank');
     }
 
